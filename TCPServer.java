@@ -32,14 +32,14 @@ public class TCPServer {
             //read from socket to ObjectInputStream object
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             //convert ObjectInputStream object to String
-            int message = ois.readInt();
-            System.out.println("Message Received: " + message);
+            long message = (long)ois.readObject();
+            System.out.println("f(r) =" + message);
 
             
             //create ObjectOutputStream object
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             //write object to Socket
-            oos.writeObject("Hi Client "+message);
+            oos.writeObject(1);
 
             //creating socket and waiting for client connection
             Socket socket2 = server.accept();

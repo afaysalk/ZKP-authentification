@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Random;
-
+import java.lang.Math;
 /**
  * This class implements java socket client
  * @author pankaj
@@ -23,7 +23,8 @@ public class TCPClient {
         ObjectInputStream ois = null;
         int g=3;
         int p=7;
-        
+        int x=15;
+        int y=(int)Math.pow(g,x)%p;
        
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
@@ -31,13 +32,20 @@ public class TCPClient {
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
             Random rand = new Random();
-            int r = rand.nextInt(); 
-            oos.writeInt(r);
+            int r = rand.nextInt(200); 
+            long u=((long)(Math.pow(g,r)%p));
+            oos.writeObject(u);
             
             //read the server response message
             ois = new ObjectInputStream(socket.getInputStream());
-            String message = (String) ois.readObject();
-            System.out.println("Message: " + message);
+            int e = (int) ois.readObject();
+            System.out.println("Challenge " + e);
+
+            if (e==1) {
+                
+            }
+
+
             //close resources
             Thread.sleep(100);
             //establish socket connection to server
@@ -45,8 +53,8 @@ public class TCPClient {
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
-            int u=4;
-            oos.writeObject(""+u);
+            int v=4;
+            oos.writeObject(""+v);
         }
     
 }
