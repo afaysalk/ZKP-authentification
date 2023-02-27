@@ -23,7 +23,7 @@ public class TCPServer {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-        
+        while(true){
             System.out.println("Waiting for the client request");
             //creating socket and waiting for client connection
             Socket socket = server.accept();
@@ -39,7 +39,10 @@ public class TCPServer {
             //create ObjectOutputStream object
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             //write object to Socket
-            oos.writeObject(1);
+            int e = 1;
+            oos.writeObject(e);
+
+            if(e==1){
 
             //creating socket and waiting for client connection
             Socket socket2 = server.accept();
@@ -48,15 +51,32 @@ public class TCPServer {
             //convert ObjectInputStream object to String
             String message2 = (String) oii.readObject();
             System.out.println("Message Received: " + message2);
+            if(message2.equalsIgnoreCase("exit")) ;
+            }
 
+            if(e==0){
+
+                //creating socket and waiting for client connection
+                Socket socket3 = server.accept();
+                //read from socket to ObjectInputStream object
+                ObjectInputStream oiu = new ObjectInputStream(socket3.getInputStream());
+                //convert ObjectInputStream object to String
+                String message3 = (String) oiu.readObject();
+                System.out.println("Message Received: " + message3);
+                if(message3.equalsIgnoreCase("exit")) ;
+                }
+
+
+           
             //close resources
             socket.close();
             //terminate the server if client sends exit request
-            //if(message.equalsIgnoreCase("exit")) 
-        
-        System.out.println("Shutting down Socket server!!");
+            
+            
+        System.out.println("Shutting down Socket server!!");}
         //close the ServerSocket object
-        server.close();
+        
+            }
+      
     }
     
-}
