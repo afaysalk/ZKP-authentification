@@ -23,7 +23,7 @@ public class TCPServer {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-        while(true){
+        
             System.out.println("Waiting for the client request");
             //creating socket and waiting for client connection
             Socket socket = server.accept();
@@ -36,13 +36,20 @@ public class TCPServer {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             //write object to Socket
             oos.writeObject("Hi Client "+message);
+
+            //creating socket and waiting for client connection
+            Socket socket2 = server.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream oii = new ObjectInputStream(socket2.getInputStream());
+            //convert ObjectInputStream object to String
+            String message2 = (String) oii.readObject();
+            System.out.println("Message Received: " + message2);
+
             //close resources
-            ois.close();
-            oos.close();
             socket.close();
             //terminate the server if client sends exit request
-            if(message.equalsIgnoreCase("exit")) break;
-        }
+            if(message.equalsIgnoreCase("exit")) 
+        
         System.out.println("Shutting down Socket server!!");
         //close the ServerSocket object
         server.close();
