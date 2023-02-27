@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Random;
 
 /**
  * This class implements java socket client
@@ -29,8 +30,10 @@ public class TCPClient {
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
-            int i=4;
-            oos.writeObject(""+i);
+            Random rand = new Random();
+            int r = rand.nextInt(); 
+            oos.writeInt(r);
+            
             //read the server response message
             ois = new ObjectInputStream(socket.getInputStream());
             String message = (String) ois.readObject();

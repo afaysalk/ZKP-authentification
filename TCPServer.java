@@ -27,11 +27,15 @@ public class TCPServer {
             System.out.println("Waiting for the client request");
             //creating socket and waiting for client connection
             Socket socket = server.accept();
+
+
             //read from socket to ObjectInputStream object
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             //convert ObjectInputStream object to String
-            String message = (String) ois.readObject();
+            int message = ois.readInt();
             System.out.println("Message Received: " + message);
+
+            
             //create ObjectOutputStream object
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             //write object to Socket
@@ -48,7 +52,7 @@ public class TCPServer {
             //close resources
             socket.close();
             //terminate the server if client sends exit request
-            if(message.equalsIgnoreCase("exit")) 
+            //if(message.equalsIgnoreCase("exit")) 
         
         System.out.println("Shutting down Socket server!!");
         //close the ServerSocket object
