@@ -27,6 +27,7 @@ public class TCPClient {
         int y=(int)Math.pow(g,x)%p;
         
         for(int i=0; i<10 ; i++){
+            System.out.println(y);
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
             //write to socket using ObjectOutputStream
@@ -51,7 +52,7 @@ public class TCPClient {
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 System.out.println("Sending v=x+r ");
                 long v=x+r;
-                oos.writeObject(""+v);
+                oos.writeObject(v);
             }
 
             if (e==0) {
@@ -63,7 +64,7 @@ public class TCPClient {
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 System.out.println("Sending v=r ");
                 long v=r;
-                oos.writeObject(""+v);
+                oos.writeObject(v);
             }
 
         }
