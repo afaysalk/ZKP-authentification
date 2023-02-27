@@ -42,19 +42,19 @@ public class TCPClient {
             System.out.println("Challenge " + e);
 
             if (e==1) {
-                
+                //close resources
+                Thread.sleep(100);
+                //establish socket connection to server
+                socket = new Socket(host.getHostName(), 9876);
+                //write to socket using ObjectOutputStream
+                oos = new ObjectOutputStream(socket.getOutputStream());
+                System.out.println("Sending v=x+r ");
+                long v=x+r;
+                oos.writeObject(""+v);
             }
 
 
-            //close resources
-            Thread.sleep(100);
-            //establish socket connection to server
-            socket = new Socket(host.getHostName(), 9876);
-            //write to socket using ObjectOutputStream
-            oos = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("Sending request to Socket Server");
-            int v=4;
-            oos.writeObject(""+v);
+            
         }
     
 }
