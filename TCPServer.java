@@ -59,7 +59,8 @@ public class TCPServer {
                 //convert ObjectInputStream object to String
                 long v = (long)oii.readObject();
                 System.out.println("Message Received: " + v);
-
+                oii.close();
+                socket2.close();
                 if(u!=(long)(Math.pow(g,v)%p)){
                     System.out.println("Mot de passe incorrect");
                     server.close();
@@ -75,14 +76,18 @@ public class TCPServer {
                 //convert ObjectInputStream object to String
                 long v = (long) oiu.readObject();
                 System.out.println("Message Received: " + v);
+                oiu.close();
+                socket3.close();
                 if((u*y)!=(long)(Math.pow(g,v)%p)){
                     System.out.println("Mot de passe incorrect");
                     server.close();
                 }
                 }
+                ois.close();
+                oos.close();
+                socket.close();
 
-
-           
+                
             //close resources
             //terminate the server if client sends exit request
             

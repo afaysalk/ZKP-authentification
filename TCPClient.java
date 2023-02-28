@@ -65,7 +65,9 @@ public class TCPClient {
                 long v=r;
                 oos.writeObject(v);
             }
-
+            ois.close();
+            oos.close();
+            Thread.sleep(100);
         }
             
         }
