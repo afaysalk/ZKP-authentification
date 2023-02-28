@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.lang.ClassNotFoundException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 import java.lang.Math;
 
 
@@ -44,7 +45,9 @@ public class TCPServer {
             //create ObjectOutputStream object
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             //write object to Socket
-            int e = 0;
+            Random rand = new Random();
+
+            int e = rand.nextInt(2);             
             oos.writeObject(e);
             
             if(e==0){
@@ -66,11 +69,11 @@ public class TCPServer {
             if(e==1){
 
                 //creating socket and waiting for client connection
-                Socket socket2 = server.accept();
+                Socket socket3 = server.accept();
                 //read from socket to ObjectInputStream object
-                ObjectInputStream oii = new ObjectInputStream(socket2.getInputStream());
+                ObjectInputStream oiu = new ObjectInputStream(socket3.getInputStream());
                 //convert ObjectInputStream object to String
-                long v = (long) oii.readObject();
+                long v = (long) oiu.readObject();
                 System.out.println("Message Received: " + v);
                 if((u*y)!=(long)(Math.pow(g,v)%p)){
                     System.out.println("Mot de passe incorrect");
@@ -81,7 +84,6 @@ public class TCPServer {
 
            
             //close resources
-            socket.close();
             //terminate the server if client sends exit request
             
             
