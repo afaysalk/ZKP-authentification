@@ -25,22 +25,21 @@ public class TCPClient {
         int p=7;
         int x=15;
         int y=(int)Math.pow(g,x)%p;
-        
         for(int i=0; i<10 ; i++){
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("Sending request to Socket Server");
+            System.out.println("Envoi requete vers serveur");
             Random rand = new Random();
             int r = rand.nextInt(200); 
-            long u=((long)(Math.pow(g,r)%p));
+            long u=(long)Math.pow(g,r)%p;
             oos.writeObject(u);
             
             //read the server response message
             ois = new ObjectInputStream(socket.getInputStream());
             int e = (int) ois.readObject();
-            System.out.println("Challenge " + e);
+            System.out.println("Defi = " + e);
 
             if (e==1) {
                 //close resources
@@ -49,8 +48,9 @@ public class TCPClient {
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println("Sending v=x+r ");
+                
                 long v=x+r;
+                System.out.println("Envoi v=x+r=:"+ v);
                 oos.writeObject(v);
             }
 
@@ -61,14 +61,15 @@ public class TCPClient {
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println("Sending v=r ");
                 long v=r;
+                System.out.println("Envoi v=r= "+v);
                 oos.writeObject(v);
             }
             ois.close();
             oos.close();
             Thread.sleep(100);
         }
+        System.out.println("Connexion acceptée");
             
         }
     

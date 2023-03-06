@@ -26,11 +26,12 @@ public class TCPServer {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-        int g=3;
-        int p=7;
-        int y=6;
+        long g=3;
+        long p=7;
+        long y=6;
         while(true){
-            System.out.println("Waiting for the client request");
+            
+            System.out.println("En attente du client");
             //creating socket and waiting for client connection
             Socket socket = server.accept();
 
@@ -39,7 +40,7 @@ public class TCPServer {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             //convert ObjectInputStream object to String
             long u = (long)ois.readObject();
-            System.out.println("f(r) =" + u);
+            System.out.println("U =" + u);
 
             
             //create ObjectOutputStream object
@@ -58,10 +59,10 @@ public class TCPServer {
                 ObjectInputStream oii = new ObjectInputStream(socket2.getInputStream());
                 //convert ObjectInputStream object to String
                 long v = (long)oii.readObject();
-                System.out.println("Message Received: " + v);
+                System.out.println("V= " + v);
                 oii.close();
                 socket2.close();
-                if(u!=(long)(Math.pow(g,v)%p)){
+                if(u!=(long)Math.pow(g,v)%p){
                     System.out.println("Mot de passe incorrect");
                     server.close();
                 }
@@ -75,10 +76,10 @@ public class TCPServer {
                 ObjectInputStream oiu = new ObjectInputStream(socket3.getInputStream());
                 //convert ObjectInputStream object to String
                 long v = (long) oiu.readObject();
-                System.out.println("Message Received: " + v);
+                System.out.println("V=" + v);
                 oiu.close();
                 socket3.close();
-                if((u*y)!=(long)(Math.pow(g,v)%p)){
+                if(((u*y)%p)!=(long)Math.pow(g,v)%p){
                     System.out.println("Mot de passe incorrect");
                     server.close();
                 }
@@ -92,7 +93,7 @@ public class TCPServer {
             //terminate the server if client sends exit request
             
             
-        System.out.println("Shutting down Socket server!!");}
+        System.out.println("Fin");}
         //close the ServerSocket object
         
             }
