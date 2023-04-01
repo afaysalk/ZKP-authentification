@@ -21,56 +21,55 @@ public class TCPClient {
         Socket socket = null;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
-        int g=3;
-        int p=7;
-        int x=15;
-        int y=(int)Math.pow(g,x)%p;
-        for(int i=0; i<10 ; i++){
+        int p=10;
+        int q=3;
+        int a=1;
+        int s=2;
+        int v=1;
+        
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Envoi requete vers serveur");
             Random rand = new Random();
-            int r = rand.nextInt(200); 
-            long u=(long)Math.pow(g,r)%p;
-            oos.writeObject(u);
-            
-            //read the server response message
-            ois = new ObjectInputStream(socket.getInputStream());
-            int e = (int) ois.readObject();
-            System.out.println("Defi = " + e);
+            int r = rand.nextInt(3); 
+            long x=(long)Math.pow(a,r)%p;
+            String message =" Vive me ";
+            int e=(message+x).hashCode();    
+            int y=(r+(s*e))%p;
+            oos.writeObject(message);
 
-            if (e==1) {
-                //close resources
+      //close resources
                 Thread.sleep(100);
                 //establish socket connection to server
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
                 
-                long v=x+r;
-                System.out.println("Envoi v=x+r=:"+ v);
-                oos.writeObject(v);
-            }
+              
+                
+                oos.writeObject(e);
+            
 
-            if (e==0) {
+           
                 //close resources
                 Thread.sleep(100);
                 //establish socket connection to server
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                long v=r;
-                System.out.println("Envoi v=r= "+v);
-                oos.writeObject(v);
-            }
-            ois.close();
+               
+                oos.writeObject(y);
+            
+
+
+
             oos.close();
             Thread.sleep(100);
+            System.out.println("Connexion acceptée");
         }
-        System.out.println("Connexion acceptée");
+        
             
         }
     
-}
