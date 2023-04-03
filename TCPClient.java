@@ -21,24 +21,18 @@ public class TCPClient {
         Socket socket = null;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
-        int p=10;
-        int q=3;
-        int a=1;
-        int s=2;
-        int v=1;
-        
+        int g =3;
+        String password =" My password ";
+        int x=(password).hashCode();   
+        long y=(long)Math.pow(g,x);
+
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Envoi requete vers serveur");
-            Random rand = new Random();
-            int r = rand.nextInt(3); 
-            long x=(long)Math.pow(a,r)%p;
-            String message =" Vive me ";
-            int e=(message+x).hashCode();    
-            int y=(r+(s*e))%p;
-            oos.writeObject(message);
+           
+            oos.writeObject(y);
 
       //close resources
                 Thread.sleep(100);
@@ -46,21 +40,23 @@ public class TCPClient {
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
-                
-              
-                
-                oos.writeObject(e);
+                long v=2;
+                long t=(long)Math.pow(g,v);
+                oos.writeObject(v);
             
 
            
+
+
+                
                 //close resources
                 Thread.sleep(100);
                 //establish socket connection to server
                 socket = new Socket(host.getHostName(), 9876);
                 //write to socket using ObjectOutputStream
                 oos = new ObjectOutputStream(socket.getOutputStream());
-               
-                oos.writeObject(y);
+                long r=v-c*x;
+                oos.writeObject(r);
             
 
 

@@ -26,11 +26,7 @@ public class TCPServer {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-        int p=10;
-        int q=3;
-        int a=1;
-        int s=2;
-        int v=1;
+       
         while(true){
             
             System.out.println("En attente du client");
@@ -41,8 +37,8 @@ public class TCPServer {
             //read from socket to ObjectInputStream object
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             //convert ObjectInputStream object to String
-            String message = (String)ois.readObject();
-            System.out.println("Message =" + message);
+            long y = (long)ois.readObject();
+            System.out.println("Y =" + y);
 
             
                 
@@ -58,6 +54,12 @@ public class TCPServer {
                 
 
            
+
+
+
+
+
+                
 
                 //creating socket and waiting for client connection
                 Socket socket3 = server.accept();
