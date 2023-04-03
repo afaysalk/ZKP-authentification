@@ -45,7 +45,11 @@ public class TCPClient {
                 oos.writeObject(v);
             
 
-           
+             //read the server response message
+             ois = new ObjectInputStream(socket.getInputStream());
+             long c = (long) ois.readObject();
+             System.out.println("C = " + c);
+ 
 
 
                 
@@ -60,7 +64,7 @@ public class TCPClient {
             
 
 
-
+            ois.close();
             oos.close();
             Thread.sleep(100);
             System.out.println("Connexion acceptée");

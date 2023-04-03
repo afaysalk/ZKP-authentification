@@ -26,7 +26,7 @@ public class TCPServer {
         //create the socket server object
         server = new ServerSocket(port);
         //keep listens indefinitely until receives 'exit' call or program terminates
-       
+        int g =3;
         while(true){
             
             System.out.println("En attente du client");
@@ -47,8 +47,8 @@ public class TCPServer {
                 //read from socket to ObjectInputStream object
                 ObjectInputStream oii = new ObjectInputStream(socket2.getInputStream());
                 //convert ObjectInputStream object to String
-                int e = (int)oii.readObject();
-                System.out.println("E= " + e);
+                long t = (long)oii.readObject();
+                System.out.println("T= " +t);
                 oii.close();
                 socket2.close();
                 
@@ -60,8 +60,8 @@ public class TCPServer {
  //write object to Socket
  Random rand = new Random();
 
- int e = rand.nextInt(2);             
- oos.writeObject(e);
+ long c = rand.nextLong(200);             
+ oos.writeObject(c);
 
 
 
@@ -72,14 +72,14 @@ public class TCPServer {
                 //read from socket to ObjectInputStream object
                 ObjectInputStream oiu = new ObjectInputStream(socket3.getInputStream());
                 //convert ObjectInputStream object o String
-                int y = (int) oiu.readObject();
-                System.out.println("Y=" + y);
+                long r = (long)oiu.readObject();
+                System.out.println("R=" + r);
                 oiu.close();
                 socket3.close();
                 
                
-                long x =(((long)Math.pow(a,y))*((long)Math.pow(v,e)))%p;
-                if ( e!=(message+x).hashCode() ){
+                long x =(((long)Math.pow(g,r))*((long)Math.pow(y,c)));
+                if ( t!=x ){
                     System.out.println("Nope");
                 }
 
