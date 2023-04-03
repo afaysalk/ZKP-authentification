@@ -55,7 +55,13 @@ public class TCPServer {
 
            
 
+ //create ObjectOutputStream object
+ ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+ //write object to Socket
+ Random rand = new Random();
 
+ int e = rand.nextInt(2);             
+ oos.writeObject(e);
 
 
 
